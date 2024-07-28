@@ -36,5 +36,5 @@ class FileHandler(socketserver.StreamRequestHandler):
 
 
 if __name__ == "__main__":
-    with socketserver.TCPServer(('', SERVER_PORT), FileHandler) as server:
-        server.serve_forever()
+    server = socketserver.TCPServer(('', SERVER_PORT), FileHandler)
+    server.serve_forever()
