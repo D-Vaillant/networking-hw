@@ -9,7 +9,7 @@ CODE = "SECRET"
 
 class FileHandler(socketserver.StreamRequestHandler):
     def handle(self):
-        print(f"Connected to {self.client_address[0]}")
+        print("Connected to {}.".format(self.client_address[0]))
 
         header = self.request.recv(1024).decode().strip()
         filename, expected_size = header.split('\t')
@@ -32,7 +32,7 @@ class FileHandler(socketserver.StreamRequestHandler):
             print("File received successfully: {}".format(filename))
             print("File size: {} bytes".format(actual_size))
         else:
-            print(f"Error: File size mismatch. Expected {} bytes, got {} bytes.".format(expected_size, actual_size))
+            print("Error: File size mismatch. Expected {} bytes, got {} bytes.".format(expected_size, actual_size))
 
 
 if __name__ == "__main__":
