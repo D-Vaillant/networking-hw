@@ -5,13 +5,13 @@ import sys
 from socket import *
 
 
-SERVER_IP: str = 'localhost'
-SERVER_PORT: int = 5002
+SERVER_IP = '10.10.11.18'
+SERVER_PORT = 5002
 
 
-def send_message(sock: socket, message: str) -> str:
+def send_message(sock, message):
     sock.sendall(bytes(message + "\n", "utf-8"))
-    print(f"Sent:     {message}")
+    print("Sent:     {message}".format(message=message))
     data = str(sock.recv(10000), "utf-8")
     return data
 
@@ -22,4 +22,4 @@ if __name__ == "__main__":
 
         arg = ' '.join(sys.argv[1:])
         response = send_message(sock, arg)
-        print(f"Received: {response}")
+        print("Received: {response}".format(response=response))

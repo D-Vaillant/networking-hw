@@ -4,20 +4,20 @@ from pathlib import Path
 from socket import *
 
 
-SERVER_IP: str = 'localhost'
-SERVER_PORT: int = 5002
+SERVER_IP = '10.10.11.18'
+SERVER_PORT = 5002
 
 
-def send_file(sock: socket, text_file: Path):
+def send_file(sock, text_file):
     filename = text_file.name
     filesize = text_file.stat().st_size
-    header = f"{filename}\t{filesize}\n"
+    header = "{filename}\t{filesize}\n".format(filename=filename, filesize=filesize)
     sock.send(bytes(header, 'utf-8'))
 
     with text_file.open('rb') as filebytes:
         sock.sendfile(filebytes, 0, filesize)
 
-    print(f"Header: {header}")
+    print("Header: {}".format(header))
 
 
 if __name__ == "__main__":

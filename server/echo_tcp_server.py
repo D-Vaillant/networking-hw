@@ -5,8 +5,8 @@ import re
 import socket
 import socketserver
 
-SERVER_PORT: int = 5002
-CODE: str = "SECRET"
+SERVER_PORT = 5002
+CODE = "SECRET"
 
 class SecretCodeHandler(socketserver.StreamRequestHandler):
     def handle(self):
@@ -15,13 +15,13 @@ class SecretCodeHandler(socketserver.StreamRequestHandler):
                                     self.data))
         if CODE in self.data:
             digits, digits_count = count_digits(self.data)
-            response = f"Digits: {digits} Count: {digits_count}"
+            response = "Digits: {} Count: {}".format(digits, digits_count)
         else:
             response = "Secret code not found."
         self.wfile.write(response.encode('utf-8'))
 
 
-def count_digits(input: str) -> (str, int):
+def count_digits(input):
     digits_pattern = re.compile(r'[^0-9]')
     digits = digits_pattern.sub('', input)
     return digits, len(digits)

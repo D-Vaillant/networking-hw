@@ -4,8 +4,8 @@ import os
 import socket
 import socketserver
 
-SERVER_PORT: int = 5002
-CODE: str = "SECRET"
+SERVER_PORT = 5002
+CODE = "SECRET"
 
 class FileHandler(socketserver.StreamRequestHandler):
     def handle(self):
@@ -15,8 +15,8 @@ class FileHandler(socketserver.StreamRequestHandler):
         filename, expected_size = header.split('\t')
         expected_size = int(expected_size)
 
-        print(f"Receiving file: {filename}")
-        print(f"Expected size: {expected_size} bytes")
+        print("Receiving file: {filename}".format(filename=filename))
+        print("Expected size: {} bytes".format(expected_size))
         
         with open(filename, 'wb') as file:
             received_size = 0
@@ -29,10 +29,10 @@ class FileHandler(socketserver.StreamRequestHandler):
         
         actual_size = os.path.getsize(filename)
         if actual_size == expected_size:
-            print(f"File received successfully: {filename}")
-            print(f"File size: {actual_size} bytes")
+            print("File received successfully: {}".format(filename))
+            print("File size: {} bytes".format(actual_size))
         else:
-            print(f"Error: File size mismatch. Expected {expected_size} bytes, got {actual_size} bytes.")
+            print(f"Error: File size mismatch. Expected {} bytes, got {} bytes.".format(expected_size, actual_size))
 
 
 if __name__ == "__main__":
