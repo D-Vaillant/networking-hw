@@ -11,7 +11,7 @@ SERVER_PORT = 5002
 def send_file(sock, text_file):
     filename = text_file.name
     filesize = text_file.stat().st_size
-    header = "{filename}\t{filesize}\n".format(filename=filename, filesize=filesize)
+    header = "{:<100}\t{:<20}\n".format(filename, filesize)
     sock.send(bytes(header, 'utf-8'))
 
     with text_file.open('rb') as filebytes:
