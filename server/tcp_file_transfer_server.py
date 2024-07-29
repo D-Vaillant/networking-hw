@@ -11,7 +11,7 @@ class FileHandler(socketserver.StreamRequestHandler):
     def handle(self):
         print("Connected to {}.".format(self.client_address[0]))
 
-        header = self.request.recv(120).decode().strip()
+        header = self.request.recv(120)
         filename = header[:100].decode().strip()
         expected_size = header[100:].decode().strip()
         expected_size = int(expected_size)
